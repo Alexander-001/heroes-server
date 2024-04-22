@@ -34,7 +34,7 @@ class Server {
 
   routes() {
     //* Api schedules
-    this.app.use(this.heroes, require("../routes/heroes"));
+    this.app.use(this.heroes, require("../routes/heroes.routes"));
     // this.app.use(this.users, require("../routes/users"));
   }
 
