@@ -17,6 +17,8 @@ const authUser = async (req, res) => {
       return res.json({
         message: "El usuario no existe.",
         CodeResult: STATUS_CODES.INVALID,
+        user: { username: "", password: "" },
+        token: null,
       });
     }
     const successPassword = await bcrypt.compareSync(password, user.password);
@@ -24,6 +26,8 @@ const authUser = async (req, res) => {
       return res.json({
         message: "La contraseña es incorrecta.",
         CodeResult: STATUS_CODES.INVALID,
+        user: { username: "", password: "" },
+        token: null,
       });
     }
     const payload = {
@@ -42,6 +46,7 @@ const authUser = async (req, res) => {
         if (error) throw error;
         res.status(200).json({
           token,
+          user,
           CodeResult: STATUS_CODES.SUCCESS,
         });
       }
@@ -115,6 +120,7 @@ const addUser = async (req, res) => {
     user = new Users(req.body);
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(password, salt);
+    user.username = user.username.toLowerCase();
     await user.save();
     return res.status(200).json({
       message: "Usuario agregado correctamente",
@@ -146,7 +152,7 @@ const updateUser = async (req, res) => {
       });
     }
     const salt = await bcrypt.genSalt(10);
-    user.username = username;
+    user.username = username.toLowerCase();
     user.password = await bcrypt.hash(password, salt);
     await user.save();
     return res.status(200).json({

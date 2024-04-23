@@ -20,6 +20,7 @@ const getHeroes = async (_, res) => {
     res.status(500).json({
       message: "Error al obtener heroes.",
       CodeResult: STATUS_CODES.ERROR,
+      heroes: [],
     });
   }
 };
@@ -43,6 +44,7 @@ const getHeroById = async (req, res) => {
     console.log(error);
     res.status(500).json({
       message: "Error al obtener heroe.",
+      heroe: {},
       CodeResult: STATUS_CODES.ERROR,
     });
   }
@@ -65,6 +67,7 @@ const getSuggestions = async (req, res) => {
     res.status(500).json({
       message: "Error al obtener sugerencias.",
       CodeResult: STATUS_CODES.ERROR,
+      heroes: [],
       error,
     });
   }
@@ -84,6 +87,7 @@ const addHeroes = async (req, res) => {
       return res.status(200).json({
         message: "Heroe ya existe.",
         CodeResult: STATUS_CODES.INVALID,
+        heroe: existHero,
       });
     }
     const heroes = new Heroes(req.body);
@@ -91,12 +95,14 @@ const addHeroes = async (req, res) => {
     return res.status(200).json({
       message: "Heroe agregado correctamente",
       CodeResult: STATUS_CODES.SUCCESS,
+      heroe: req.body,
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       message: "Error al añadir heroe.",
       CodeResult: STATUS_CODES.ERROR,
+      heroe: {},
     });
   }
 };
@@ -122,6 +128,7 @@ const updateHero = async (req, res) => {
       return res.status(200).json({
         message: "Heroe no existe",
         CodeResult: STATUS_CODES.INVALID,
+        heroe: hero,
       });
     }
     hero.superhero = superhero;
@@ -134,12 +141,14 @@ const updateHero = async (req, res) => {
     return res.status(200).json({
       message: "Heroe actualizado.",
       CodeResult: STATUS_CODES.SUCCESS,
+      heroe: hero,
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       message: "Error al actualizar heroe.",
       CodeResult: STATUS_CODES.ERROR,
+      heroe: {},
     });
   }
 };
@@ -157,12 +166,14 @@ const deleteHero = async (req, res) => {
     res.status(200).json({
       message: "Heroe eliminado correctamente.",
       CodeResult: STATUS_CODES.SUCCESS,
+      heroe: hero,
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       message: "Error al actualizar heroe.",
       CodeResult: STATUS_CODES.ERROR,
+      heroe: {},
     });
   }
 };

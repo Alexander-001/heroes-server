@@ -24,7 +24,7 @@ const validHero = [
 router.get("/", getHeroes);
 router.get("/suggestions", getSuggestions);
 router.get("/:id", getHeroById);
-router.post("/:hero", validHero, addHeroes);
+router.post("/add", validHero, addHeroes);
 router.patch("/:id", validHero, updateHero);
 router.delete("/:id", deleteHero);
 
