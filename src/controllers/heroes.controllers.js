@@ -16,6 +16,7 @@ const getHeroes = async (_, res) => {
       CodeResult: STATUS_CODES.SUCCESS,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Error al obtener heroes.",
       CodeResult: STATUS_CODES.ERROR,
@@ -39,6 +40,7 @@ const getHeroById = async (req, res) => {
       CodeResult: STATUS_CODES.SUCCESS,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Error al obtener heroe.",
       CodeResult: STATUS_CODES.ERROR,
@@ -59,6 +61,7 @@ const getSuggestions = async (req, res) => {
       CodeResult: STATUS_CODES.SUCCESS,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Error al obtener sugerencias.",
       CodeResult: STATUS_CODES.ERROR,
@@ -71,7 +74,7 @@ const addHeroes = async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return response
+      return res
         .status(200)
         .json({ errors: errors.array(), CodeResult: STATUS_CODES.INVALID });
     }
@@ -90,6 +93,7 @@ const addHeroes = async (req, res) => {
       CodeResult: STATUS_CODES.SUCCESS,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Error al añadir heroe.",
       CodeResult: STATUS_CODES.ERROR,
@@ -101,7 +105,7 @@ const updateHero = async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return response
+      return res
         .status(200)
         .json({ errors: errors.array(), CodeResult: STATUS_CODES.INVALID });
     }
@@ -132,6 +136,7 @@ const updateHero = async (req, res) => {
       CodeResult: STATUS_CODES.SUCCESS,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Error al actualizar heroe.",
       CodeResult: STATUS_CODES.ERROR,
@@ -154,6 +159,7 @@ const deleteHero = async (req, res) => {
       CodeResult: STATUS_CODES.SUCCESS,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Error al actualizar heroe.",
       CodeResult: STATUS_CODES.ERROR,
